@@ -9,6 +9,19 @@
     <br />
     <button type="button" id="messageButton">Click to send a message to the app</button>
   </body>
+  <script>
+  function loadFile(filepath) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('image');
+      output.src = dataURL;
+    };
+    reader.readAsDataURL(filepath);
+  };
+</script>
   <script type="text/javascript">
     // when the button is clicked, send a message to the app
     document.getElementById('messageButton').onclick = function() {
@@ -18,7 +31,11 @@
     // when we get a message from the app, display it on the page
     ThunkableWebviewerExtension.receiveMessage(function(message) {
       document.getElementById('messageDisplay').innerHTML = message;
-      document.getElementById('image').setAttribute("src", message)
+      //document.getElementById('image').setAttribute("src", message)
+      loadFile(message)
     });
+
+
   </script>
+  
 </html>

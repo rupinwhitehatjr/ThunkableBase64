@@ -32,7 +32,10 @@
         var output = document.getElementById('image');
         output.src = dataURL;
       };
-      reader.readAsDataURL(message); 
+      if(message)
+      {
+        reader.readAsDataURL(message);
+      } 
     });
 
 

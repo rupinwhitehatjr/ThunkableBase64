@@ -13,13 +13,7 @@
   function loadFile(filepath) {
     //var input = event.target;
 
-    var reader = new FileReader();
-    reader.onload = function(){
-      var dataURL = reader.result;
-      var output = document.getElementById('image');
-      output.src = dataURL;
-    };
-   reader.readAsDataURL(filepath); 
+    
   }
 </script>
   <script type="text/javascript">
@@ -32,7 +26,13 @@
     ThunkableWebviewerExtension.receiveMessage(function(message) {
       document.getElementById('messageDisplay').innerHTML = message;
       //document.getElementById('image').setAttribute("src", message)
-      loadFile(message)
+      var reader = new FileReader();
+      reader.onload = function(){
+        var dataURL = reader.result;
+        var output = document.getElementById('image');
+        output.src = dataURL;
+      };
+      reader.readAsDataURL(filepath); 
     });
 
 

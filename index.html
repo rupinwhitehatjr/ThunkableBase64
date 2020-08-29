@@ -5,6 +5,7 @@
   </head>
   <body>
     <span id="messageDisplay"></span>
+    <span id="errord"></span>
     <img id="image" src="" width="300"></img>
     <br />
     <button type="button" id="messageButton">Click to send a message to the app</button>
@@ -24,13 +25,18 @@
 
     // when we get a message from the app, display it on the page
     ThunkableWebviewerExtension.receiveMessage(function(message) {
+      
       document.getElementById('messageDisplay').innerHTML = message;
       //document.getElementById('image').setAttribute("src", message)
+
       var reader = new FileReader();
       reader.onload = function(){
         var dataURL = reader.result;
         var output = document.getElementById('image');
         output.src = dataURL;
+      };
+      reader.onerror = function(event) {
+      document.getElementById('errord').innerHTML= event.target.error.code;
       };
       if(message)
       {
